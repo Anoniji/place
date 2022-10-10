@@ -1,46 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
 
-    <meta name="description" content="Create your place, put a pixel and defend your creations">
-    <meta name="keywords" content="Place, pixelsgame">
-    <meta name="author" content="Niji Ano">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name='description' content='Create your place, put a pixel and defend your creations'>
+    <meta name='keywords' content='Place, pixelsgame'>
+    <meta name='author' content='Niji Ano'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no'>
 
-    <meta property="og:image" content="img/favicon.png" />
+    <meta property='og:image' content='img/favicon.png' />
 
     <title>Place by Anoniji</title>
-    <script src="./js/jquery-3.6.1.min.js"></script>
-    <script src="./js/jquery-ui.min.js"></script>
-    <script src="./js/jquery.ui.touch-punch.js"></script>
-    <script src="./js/js-snackbar.min.js"></script>
-    <script src="./js/colorPick.min.js"></script>
+    <script src='./js/jquery-3.6.1.min.js'></script>
+    <script src='./js/jquery-ui.min.js'></script>
+    <script src='./js/jquery.ui.touch-punch.js'></script>
+    <script src='./js/js-snackbar.min.js'></script>
+    <script src='./js/colorPick.min.js'></script>
 
-    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel='icon' type='image/png' href='img/favicon.png' />
 
-    <link rel="stylesheet" href="./css/app.css">
-    <link rel="stylesheet" href="./css/js-snackbar.min.css">
-    <link rel="stylesheet" href="./css/colorPick.min.css">
-    <link rel="stylesheet" href="./css/colorPick.dark.theme.css">
+    <link rel='stylesheet' href='./css/app.css'>
+    <link rel='stylesheet' href='./css/js-snackbar.min.css'>
+    <link rel='stylesheet' href='./css/colorPick.min.css'>
+    <link rel='stylesheet' href='./css/colorPick.dark.theme.css'>
 
-    <style type="text/css">
-        @font-face{
-            font-family: "FeltTipSenior";
-            src: url("./font/FeltTipSenior.eot");
-            src: url("./font/FeltTipSenior.eot?#iefix") format("embedded-opentype"),url("./font/FeltTipSenior.woff") format("woff"),url("./font/FeltTipSenior.woff2") format("woff2"),url("./font/FeltTipSenior.ttf") format("truetype"),url("./font/FeltTipSenior.svg#FeltTipSenior") format("svg");
-            font-weight: normal;
-            font-style: normal;
-            font-display: swap;
-        }
+    <style type='text/css'>
+        @font-face{font-family:FeltTipSenior;src:url('./font/FeltTipSenior.eot');src:url('./font/FeltTipSenior.eot?#iefix') format('embedded-opentype'),url('./font/FeltTipSenior.woff') format('woff'),url('./font/FeltTipSenior.woff2') format('woff2'),url('./font/FeltTipSenior.ttf') format('truetype'),url('./font/FeltTipSenior.svg#FeltTipSenior') format('svg');font-weight:400;font-style:normal;font-display:swap}
 
-        body {
-            margin: 0;
-            padding: 0;
-            color: #000;
-            background-color: #1c2024;
-            overflow: hidden;
-            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        body{margin:0;padding:0;color:#000;background-color:#1c2024;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'}
+
+        audio {
+            display: none;
         }
 
         #place {
@@ -73,43 +63,17 @@
         #cr {
             position: fixed;
             width: 300px !important;
-            top: 0;
+            bottom: 0;
             height: 40px;
-            right: 25px;
-            font-size: 14px !important;
-            padding: 4px !important;
+            left: 15px;
+            font-size: 13px !important;
+            padding: 0 !important;
+            background-color: transparent! important;
+            border: none! important;
+            text-align: left;
         }
 
-        #logout {
-            position: fixed;
-            width: 300px !important;
-            top: 0;
-            height: 40px;
-            left: 25px;
-            font-size: 14px !important;
-            padding: 4px !important;
-        }
-
-        .action {
-            opacity: .1;
-            background-color: #111416;
-            color: #fff;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 34px;
-            transition: all .3s;
-            cursor: pointer;
-            user-select: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .action img {
-            width: 33px;
-            margin-top: 7px;
-            user-select: none;
-        }
+        .action{opacity:.1;background-color:#111416;color:#fff;border-radius:50%;width:50px;height:50px;font-size:34px;transition:opacity .3s;cursor:pointer;user-select:none;padding:0;margin:0}.action img{width:33px;margin-top:7px;user-select:none}
 
         #return_home {
             position: fixed;
@@ -133,46 +97,65 @@
             left: 12px;
         }
 
-        #zoomUp {
+        #zoomDown,#zoomUp{position:fixed;z-index:100;left:12px}#zoomUp{bottom:128px}#zoomDown{bottom:68px}
+
+        #overlay_add,#overlay_checked{position:fixed;z-index:100;bottom:8px}#overlay{position:fixed;top:15px;left:15px}#overlay_add{left:12px}#overlay_checked{display:none;opacity:.9;left:72px}
+
+        #place_mode {
             position: fixed;
             z-index: 100;
             bottom: 128px;
-            left: 12px;
+            right: 10px;
+            cursor: default !important;
         }
 
-        #zoomDown {
+        #place_help {
             position: fixed;
             z-index: 100;
             bottom: 68px;
-            left: 12px;
+            right: 10px;
         }
 
-        #overlay {
+        #dark_mode {
             position: fixed;
-            top: 15px;
-            left: 15px;
-        }
-
-        #overlay_add {
-            position: fixed;
-            opacity: 0.2;
             z-index: 100;
             bottom: 8px;
-            left: 12px;
+            right: 10px;
         }
 
-        #overlay_checked {
+        #music_player {
             position: fixed;
+            z-index: 100;
+            bottom: 8px;
+            right: 68px;
+            opacity:.1;
+        }
+
+        #loading {
             display: none;
-            opacity: 0.9;
-            z-index: 100;
-            bottom: 8px;
-            left: 72px;
+            position: fixed;
+            z-index: 10000000000;
+            top: 45px;
+            left: 45px;
+            background-color: #111416;
+            border: 2px solid #000000;
+            width: 100px;
+            height: 26px;
+            border-radius: 8px;
+        }
+
+        #loading div {
+            color: #fff;
+            line-height: 26px;
+            padding-left: 12px;
+            font-size: 12px;
         }
 
         #px_info {
             opacity: 0;
             position: fixed;
+            top: -80px;
+            left: -80px;
             z-index: 10000;
             background-color: #111416;
             color: #fff;
@@ -191,6 +174,7 @@
             color: #fff;
             border-radius: 0 0 8px 0;
             border-bottom: 5px solid #ff000052;
+            width: 210px;
             height: 52px;
             line-height: 52px;
             font-size: 18px;
@@ -205,6 +189,7 @@
 
         #go_place {
             display: none;
+            cursor: pointer;
         }
 
         #home {
@@ -216,24 +201,27 @@
             height: 300px;
             padding: 8px;
             z-index: 10;
+            user-select: none;
         }
 
         #home img {
             width: 128px;
             height: 128px;
+            border: 4px solid #000;
+            border-radius: 18px;
         }
 
         #home .title {
-            font-family: "FeltTipSenior";
+            font-family: 'FeltTipSenior';
             color: rgba(254, 254, 254, .8);
-            margin: 8px 0 14px;
+            margin: 4px 0 8px;
             font-size: 60px;
             opacity: 0;
             line-height: 65px;
         }
 
         #home button {
-            border: 1px solid #000000;
+            border: 4px solid #000000;
             border-radius: 0 0 6px 6px;
             padding: 8px;
             line-height: 19px;
@@ -241,6 +229,33 @@
             background-color: #111416;
             color: rgba(254, 254, 254, .8);
             width: 100%;
+        }
+
+        #place_list {
+            display: none;
+            position: fixed;
+            overflow-y: auto;
+            height: 128px;
+            border: 4px solid #000000;
+            border-radius: 6px 0 0 6px;
+            padding: 8px;
+            background-image: url(./img/grid_mini.png);
+            color: #fff;
+            line-height: 22px;
+            font-size: 12px;
+            right: 0;
+            top: calc(50% - 60px);
+            width: 150px;
+        }
+
+        @media only screen and (max-width: 700px)  {
+            #place_list {
+                display: none;
+            }
+        }
+
+        #place_list div {
+            cursor: pointer;
         }
 
         #go_auth, #go_gest {
@@ -254,19 +269,23 @@
 
         #poss_info {
             position: fixed;
-            right: 8px;
-            top: 3px;
+            left: 0px;
+            bottom: 365px;
             font-size: 8px;
             color: #fff;
+            width: 76px;
+            text-align: center;
+            user-select: none;
         }
 
         #new_session {
             text-align: center;
-            border: 1px solid #000000;
+            border: 4px solid #000000;
+            border-bottom: 0;
             border-radius: 6px 6px 0 0;
             padding: 8px;
             line-height: 19px;
-            width: calc(100% - 18px);
+            width: calc(100% - 24px);
             display: none;
         }
 
@@ -279,6 +298,7 @@
             z-index: 100;
             top: 15px;
             left: 15px;
+            border-radius: 50%;
         }
 
         .blur {
@@ -287,21 +307,11 @@
             box-shadow: 0px 0px 3px grey;
         }
 
-        .js-snackbar__message {
-            user-select: none;
-        }
-
-        .js-snackbar__close {
-            display: none !important;
-        }
-
-        .js-snackbar__message-wrapper {
-            margin-right: 5px;
-        }
+        .js-snackbar__message{user-select:none}.js-snackbar__close{display:none!important}.js-snackbar__message-wrapper{margin-top:-4px; margin-right:5px}
 
         #mode {
             position: fixed;
-            top: 18px;
+            top: 65px;
             right: 25px;
             font-size: 25px;
             opacity: 0.08;
@@ -329,6 +339,15 @@
             text-align: center;
         }
 
+        #creator select {
+            background-color: #111416;
+            color: #fff;
+            border: 1px solid #000;
+            width: 120px;
+            height: 36px;
+            text-align: left;
+        }
+
         #creator button {
             background-color: #6e6e6e;
             color: #fff;
@@ -339,408 +358,313 @@
             padding: 0 14px;
         }
 
-        #helper {
-            position: fixed;
-            z-index: 10000;
-            left: 70px;
-            bottom: 5px;
-            background-color: #111416;
-            color: #fff;
-            border-radius: 5px;
-            padding-right: 25px;
-            padding-left: 15px;
-            display: none;
-            user-select: none;
+        #helper{position:fixed;z-index:10000;left:70px;bottom:5px;background-color:#111416;color:#fff;border-radius:5px;padding-right:25px;padding-left:15px;display:none;user-select:none}#helper ul{padding:0;margin:0}#helper li{padding:6px 0 0;line-height:54px}
+
+        #colorPick{width:226px}.customColorHash{width:206px}.colorPickSelector{border-radius:5px;width:36px;height:36px;cursor:pointer;-webkit-transition:.2s linear;-moz-transition:.2s linear;-ms-transition:.2s linear;-o-transition:.2s linear;transition:.2s linear}.colorPickSelector:hover{transform:scale(1.1)}
+
+        .js-snackbar{user-select:none;background-image: url(./img/grid_mini.png);border: 4px solid #000000}.cnt_user{color:#fff!important}
+        .js-snackbar__action:hover {
+            background-color: rgb(51, 51, 51, .25);
+        }
+        .js-snackbar--info {
+            background-color: rgb(85, 172, 238) !important;
         }
 
-        #helper ul {
-            padding: 0;
-            margin: 0;
-        }
-
-        #helper li {
-            padding: 6px 0 0 0;
-            line-height: 54px;
-        }
-
-        .colorPickSelector {
-            border-radius: 5px;
-            width: 36px;
-            height: 36px;
-            cursor: pointer;
-            -webkit-transition: all linear .2s;
-            -moz-transition: all linear .2s;
-            -ms-transition: all linear .2s;
-            -o-transition: all linear .2s;
-            transition: all linear .2s;
-        }
-        .colorPickSelector:hover { transform: scale(1.1); }
-
-        .ui-resizable {
-            position: relative;
-        }
-        .ui-resizable-handle {
-            position: absolute;
-            font-size: 0.1px;
-            display: block;
-            -ms-touch-action: none;
-            touch-action: none;
-        }
-        .ui-resizable-disabled .ui-resizable-handle,
-        .ui-resizable-autohide .ui-resizable-handle {
-            display: none;
-        }
-        .ui-resizable-n {
-            cursor: n-resize;
-            height: 7px;
-            width: 100%;
-            top: -5px;
-            left: 0;
-        }
-        .ui-resizable-s {
-            cursor: s-resize;
-            height: 7px;
-            width: 100%;
-            bottom: -5px;
-            left: 0;
-        }
-        .ui-resizable-e {
-            cursor: e-resize;
-            width: 7px;
-            right: -5px;
-            top: 0;
-            height: 100%;
-        }
-        .ui-resizable-w {
-            cursor: w-resize;
-            width: 7px;
-            left: -5px;
-            top: 0;
-            height: 100%;
-        }
-        .ui-resizable-se {
-            cursor: se-resize;
-            width: 12px;
-            height: 12px;
-            right: 1px;
-            bottom: 1px;
-        }
-        .ui-resizable-sw {
-            cursor: sw-resize;
-            width: 9px;
-            height: 9px;
-            left: -5px;
-            bottom: -5px;
-        }
-        .ui-resizable-nw {
-            cursor: nw-resize;
-            width: 9px;
-            height: 9px;
-            left: -5px;
-            top: -5px;
-        }
-        .ui-resizable-ne {
-            cursor: ne-resize;
-            width: 9px;
-            height: 9px;
-            right: -5px;
-            top: -5px;
-        }
+        .ui-resizable{position:relative}.ui-resizable-handle{position:absolute;font-size:.1px;display:block;-ms-touch-action:none;touch-action:none}.ui-resizable-autohide .ui-resizable-handle,.ui-resizable-disabled .ui-resizable-handle{display:none}.ui-resizable-n{cursor:n-resize;height:7px;width:100%;top:-5px;left:0}.ui-resizable-s{cursor:s-resize;height:7px;width:100%;bottom:-5px;left:0}.ui-resizable-e{cursor:e-resize;width:7px;right:-5px;top:0;height:100%}.ui-resizable-w{cursor:w-resize;width:7px;left:-5px;top:0;height:100%}.ui-resizable-se{cursor:se-resize;width:12px;height:12px;right:1px;bottom:1px}.ui-resizable-sw{cursor:sw-resize;width:9px;height:9px;left:-5px;bottom:-5px}.ui-resizable-nw{cursor:nw-resize;width:9px;height:9px;left:-5px;top:-5px}.ui-resizable-ne{cursor:ne-resize;width:9px;height:9px;right:-5px;top:-5px}
     </style>
 </head>
 
 <body>
-    <div id="wip">
-        <span class="key_01">Maintenance in progress</span>
-        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-    </div>
-
-    <section id="home">
-        <img src="./img/favicon.png">
-        <div class="title">Place</div>
-        <input type="text" id="new_session" placeholder="Session name ?">
-        <div>
-            <button id="go_place" class="key_03">Go to my Place</button>
-            <button id="go_auth" class="key_04" onclick="getAuthDiscord();">Authentication with Discord</button>
-            <button id="go_gest" class="key_05" onclick="getAuthGuest();">Guest account</button>
-        </div>
-
-        <button id="cr" class="rth key_06" onclick="goMainSite();">created by Anoniji</button>
+    <section id='wip'>
+        <span class='key_01'>Maintenance in progress</span>
+        <div class='lds-ellipsis'><div></div><div></div><div></div><div></div></div>
     </section>
 
-    <section id="session">
+    <section id='general_actions'>
+        <div id='loading'><div class='key_40'>Loading</div></div>
+        <audio loop src="./musics/SouMix & Bromar - Falling For You [NCS Release].mp3"></audio>
+        <button class='action' id='dark_mode' onclick='dark_mode();'>
+            <img src='./img/sun_icon.png'>
+        </button>
+        <button class='action' id='music_player' onclick='music_player();' title='Song: SouMix & Bromar - Falling For You [NCS Release]
+Music provided by NoCopyrightSounds
+Free Download/Stream: http://ncs.io/SMB_FFY
+Watch: http://youtu.be/'>
+            <img src='./img/play_icon.png'>
+        </button>
+    </section>
 
-        <div id="actions">
-            <input id="fileid" type="file" accept="image/*" hidden/>
-
-            <button class="action" id="return_home" onclick="return_home();">
-                <img src="./img/home_icon.png">
-            </button>
-            <button class="action" id="stopMove" onclick="toggleDraggablePlace();">
-                <img src="./img/move_icon.png">
-            </button>
-            <button class="action" id="razPos" onclick="razPos();">
-                <img src="./img/c_icon.png">
-            </button>
-            <button class="action" id="zoomUp" onclick="zoomUp();">
-                <img src="./img/p_icon.png">
-            </button>
-            <button class="action" id="zoomDown" onclick="zoomDown();">
-                <img src="./img/m_icon.png">
-            </button>
-            <button class="action" id="overlay_add" onclick="openDialog();">
-                <img src="./img/gallery_icon.png">
-            </button>
-            <button class="action" id="overlay_checked" onclick="overlay_checked();">
-                <img src="./img/checked_icon.png">
-            </button>
+    <section id='home'>
+        <div id='grid'></div>
+        <img src='./img/favicon.png'>
+        <div class='title'>Place</div>
+        <input type='text' id='new_session' placeholder='Session name ?'>
+        <div>
+            <button id='go_place' class='key_03'>Go to my Place</button>
+            <button id='go_auth' class='key_04' onclick='getAuthDiscord();'>Authentication with Discord</button>
+            <button id='go_gest' class='key_05' onclick='getAuthGuest();'>Guest account</button>
         </div>
 
-        <div id="creator"></div>
+        <div id='place_list'></div>
 
-        <div id="overlay">
-            <img width="100%" height="100%" >
+        <button id='cr' class='rth key_06' onclick='goMainSite();'>created by Anoniji</button>
+    </section>
+
+    <section id='session'>
+        <div id='actions'>
+            <input id='fileid' type='file' accept='image/*' hidden/>
+            <button class='action' id='return_home' onclick='return_home();'>
+                <img src='./img/home_icon.png'>
+            </button>
+            <button class='action' id='stopMove' onclick='toggleDraggablePlace();'>
+                <img src='./img/move_icon.png'>
+            </button>
+            <button class='action' id='razPos' onclick='razPos();'>
+                <img src='./img/c_icon.png'>
+            </button>
+            <button class='action' id='zoomUp' onclick='zoomUp();'>
+                <img src='./img/p_icon.png'>
+            </button>
+            <button class='action' id='zoomDown' onclick='zoomDown();'>
+                <img src='./img/m_icon.png'>
+            </button>
+            <button class='action' id='overlay_add' onclick='openDialog();'>
+                <img src='./img/gallery_icon.png'>
+            </button>
+            <button class='action' id='overlay_checked' onclick='overlay_checked();'>
+                <img src='./img/checked_icon.png'>
+            </button>
+            <button class='action' id='place_help' onclick='helper();'>
+                <img src='./img/help_icon.png'>
+            </button>
         </div>
-        <canvas id="place"></canvas>
-        <div id="color_selector" class="colorPickSelector"></div>
-        <div id="poss_info"></div>
-        <div id="px_info"></div>
-
-        <div id="mode"></div>
-
-        <div id="helper">
+        <div id='creator'></div>
+        <div id='overlay'><img width='100%' height='100%'></div>
+        <canvas id='place'></canvas>
+        <div id='color_selector' class='colorPickSelector'></div>
+        <div id='poss_info'></div>
+        <div id='px_info'></div>
+        <div id='mode'></div>
+        <div id='helper'>
             <ul>
-                <li class="key_07">Back to Home</li>
-                <li class="key_08">Enable/Disable Place movement</li>
-                <li class="key_09">Move the Place to the top left</li>
-                <li class="key_10">Increase zoom</li>
-                <li class="key_11">Decrease zoom</li>
-                <li class="key_12">Add a overlay</li>
+                <li class='key_07'>Back to Home</li>
+                <li class='key_08'>Enable/Disable Place movement</li>
+                <li class='key_09'>Move the Place to the top left</li>
+                <li class='key_10'>Increase zoom</li>
+                <li class='key_11'>Decrease zoom</li>
+                <li class='key_12'>Add a overlay</li>
             </ul>
         </div>
-
-        <button class="rth key_13" onclick="helper();">show/hide help</button>
     </section>
 </body>
 
-<script type="text/javascript">
-    "fr"!=(language=navigator.language.split("-")[0])&&(language="en")
-    var langpak;
+<script type='text/javascript'>
+    // init vars
+    var _URL=window.URL||window.webkitURL;
+    var wss_url='wss://wss-place.anoniji.dev';
+    var wsocket = new WebSocket(wss_url);
+    var px_x=100,px_y=100,max_size=500,delta_pxs=300,writing,file,img,langpak,eta_draggable=!0;
+
+    // init localStorage
+    var lightmode=localStorage.getItem('lightmode'),pseudo=localStorage.getItem('username'),user=localStorage.getItem('id');
+
+    // lang set
+    'fr'!=(language=navigator.language.split('-')[0])&&(language='en')
     $.ajax({
         url: '/langs/' + language + '.json',
         async: false,
         dataType: 'json',
         success: function(response) {
             langpak = response;
-            if(language != "en") {
-                $("#new_session").attr("placeholder", langpak["key_02"]);
+            if(language != 'en') {
+                $('#new_session').attr('placeholder', langpak['key_02']);
+                $('#place_help').attr('title', langpak['key_13']);
             }
+            $('#dark_mode').attr('title', langpak['key_36']);
             $.each(langpak, function(index, value){
-                $("." + index).html(value);
+                $('.' + index).html(value);
             });
         }
     });
 
-    function getRandomInt(n){return Math.floor(Math.random()*n)}
-    function resetOverlay(){
-        $("#overlay").css({'width': 0, 'height': 0, 'top': '15px', 'left': '15px'});
-        $("#overlay_checked").hide();
-        $("#overlay_add").html('<img src="./img/gallery_icon.png">').attr('onclick', 'openDialog();').css({'opacity': .2});
-        $('#overlay img').removeAttr('src');
-        $('#fileid').val('');
-        $("#place").fadeIn(300);
-        $("#overlay").draggable("enable").resizable("enable");
-    }
-    function overlay_checked() {
-        $("#overlay_checked").hide();
-        $("#place").fadeIn(300);
-        $("#overlay").draggable("disable").resizable("disable");
+    // ws init
+    wsocket.onclose=function(n){$('section').fadeOut(300),SnackBar({fixed:!0,position:'bc',message:langpak.key_28,status:'warning'}),setTimeout(function(){location.reload()},5e3)};
+
+    // light mode
+    if(lightmode) {
+        $('#dark_mode').html('<img src=\'./img/moon_icon.png\'>');
+        $('body').animate({'background-color': '#e3e3e3'}, 300);
+        $('#home .title, #cr').animate({'color': 'rgb(0, 0, 0, .8)'}, 300);
+    } else {
+        $('#cr').animate({'color': 'rgb(254, 254, 254, .8)'}, 300);
     }
 
-    function helper(argument) {
-        $("#helper").fadeToggle(300);
+    function dark_mode() {
+        var lightmode = localStorage.getItem('lightmode');
+        if(lightmode) {
+            $('#dark_mode').html('<img src=\'./img/sun_icon.png\'>');
+            $('body').animate({'background-color': '#1c2024'}, 300);
+            $('#home .title, #cr').animate({'color': 'rgb(254, 254, 254, .8)'}, 300);
+            localStorage.removeItem('lightmode');
+        } else {
+            $('#dark_mode').html('<img src=\'./img/moon_icon.png\'>');
+            $('body').animate({'background-color': '#e3e3e3'}, 300);
+            $('#home .title, #cr').animate({'color': 'rgb(0, 0, 0, .8)'}, 300);
+            localStorage.setItem('lightmode', 'enable');
+        }
     }
+
+    // music player
+    function music_player() {
+        const audio = document.querySelector("audio");
+        if (audio.paused) {
+            audio.volume = 0.1;
+            audio.play();
+            $('#music_player').html('<img src=\'./img/stop_icon.png\'>').animate({opacity:.8},150)
+        } else {
+            audio.pause();
+            $('#music_player').html('<img src=\'./img/play_icon.png\'>').animate({opacity:.1},150)
+        }
+    }
+
+    // function minified
+    function getRandomInt(n){return Math.floor(Math.random()*n)}
+    function containsOnlyNumbers(n){return/^\d+$/.test(n)}
+    function change_size(i,e){size=$("#"+i).val(),containsOnlyNumbers(size)?(size=parseInt(size,10)+10,size>max_size&&(size=max_size),$("#"+i).val(size.toString())):$("#"+i).val(e.toString())}
+    function check_size(i,e){size=$("#"+i).val(),containsOnlyNumbers(size)?(size=parseInt(size,10),size>max_size&&(size=max_size),$("#"+i).val(size.toString())):$("#"+i).val(e.toString())}
+    function change_mode(){new_mode=$("#place_select_mode").val(),wsocket.send("mode;"+user+";"+session+";"+new_mode)}
+    function helper(e){writing?$(".key_12").show():$(".key_12").hide(),$("#helper").fadeToggle(300)}
+    function getLogout(){localStorage.removeItem('id'),localStorage.removeItem('username'),localStorage.removeItem('email'),location.href='/'}
+    function getAuthDiscord(){location.href='https://discord.com/api/oauth2/authorize?client_id=1022156371262722189&redirect_uri=https%3A%2F%2Fplace.anoniji.dev%2Fauth&response_type=code&scope=identify%20email'}
+    function getAuthGuest(){var e='guest_'+getRandomInt(5e5).toString();localStorage.setItem('id',e),localStorage.setItem('username',e),localStorage.setItem('email',e+'@anoniji.dev'),location.href='/'}
+    function getPlace(){window.location.hash='#'+$('#new_session').val(),location.reload()}
+    function goMainSite(){location.href='https://github.com/Anoniji/place'}
+    function new_size(){const e=$('#new_size_x').val(),s=$('#new_size_y').val();wsocket.send('size;'+user+';'+session+';'+e.toString()+';'+s.toString())}
+    function razPos(){position='70;68',localStorage.setItem('position',position),$('#place').animate({left:'70px',top:'68px'},300)}
+    function write_mode(e){wsocket.send('writing;'+user+';'+session+';'+e)}
+    function clear_place(){1==confirm(langpak.key_35)&&wsocket.send('clear;'+user+';'+session)}
+    function return_home(){window.location.hash='',location.reload()}
+    function toggleDraggablePlace(){eta_draggable?($('#stopMove').animate({opacity:.1},150),$('#place').draggable('disable'),eta_draggable=!1):($('#stopMove').animate({opacity:.8},150),$('#place').draggable('enable'),eta_draggable=!0)}
+    function resetOverlay(){$('#overlay').css({width:0,height:0,top:'15px',left:'15px'}),$('#overlay_checked').hide(),$('#overlay_add').html('<img src=\'./img/gallery_icon.png\'>').attr('onclick','openDialog();').css({opacity:''}),$('#overlay img').removeAttr('src'),$('#fileid').val(''),$('#place').fadeIn(300),$('#overlay').draggable('enable').resizable('enable')}
+    function overlay_checked(){$('#overlay_checked').hide(),$('#place').fadeIn(300),$('#overlay').draggable('disable').resizable('disable'),$('#overlay img').css('cursor','default')}
+    function waitForElm(e){return new Promise((t=>{if(document.querySelector(e))return t(document.querySelector(e));const r=new MutationObserver((o=>{document.querySelector(e)&&(t(document.querySelector(e)),r.disconnect())}));r.observe(document.body,{childList:!0,subtree:!0})}))}
+    function place_select(e){$("#new_session").val(e)}
 
     // overlay ------------------------------------------>
-    var _URL = window.URL || window.webkitURL;
-    var file, img;
-    function openDialog(){document.getElementById("fileid").click()}
-    $("#fileid").change(function(e) {
+    function openDialog(){document.getElementById('fileid').click()}
+    $('#fileid').change(function(e) {
         if ((file = this.files[0])) {
             img = new Image();
-            img.onload = function() {
-                $("#overlay").css({'top': '0px', 'left': '0px', 'width': parseInt(this.width, 10), 'height': parseInt(this.height, 10)});
-            };
-            img.onerror = function() {
-                SnackBar({
-                    fixed: true,
-                    position: 'bc',
-                    message: langpak['key_144'] + type,
-                    status: "danger"
-                });
-            };
+            img.onload=function(){$('#overlay').css({top:'68px',left:'70px',width:parseInt(this.width,10),height:parseInt(this.height,10)})};
+            img.onerror=function(){SnackBar({fixed:!0,position:'bc',message:langpak.key_14+type,status:'danger'})};
             img.src = _URL.createObjectURL(file)
-            $("#overlay_checked").show();
-            $('#overlay img').attr('src', img.src);
-            $("#overlay_add").html('<img src="./img/recyclebin_icon.png">').attr('onclick', 'resetOverlay();').css({'opacity': .9});
-            $("#place").fadeOut(300);
+            $('#overlay_checked').show(),$('#overlay img').attr('src',img.src).css('cursor','all-scroll'),$('#overlay_add').html('<img src=\'./img/recyclebin_icon.png\'>').attr('onclick','resetOverlay();').css({opacity:.9}),$('#place').fadeOut(300);
         }
     });
-    $("#overlay").draggable().resizable({
-        aspectRatio: true,
-    });
-
+    $('#overlay').draggable().resizable({aspectRatio:!0});
     // overlay ------------------------------------------>
 
-    function getLogout(){localStorage.removeItem("id"),localStorage.removeItem("username"),localStorage.removeItem("email"),location.href="/"}
-    function getAuthDiscord(){location.href="..."}
-    function getAuthGuest(){var e="guest_"+getRandomInt(5e5).toString();localStorage.setItem("id",e),localStorage.setItem("username",e),localStorage.setItem("email",e+"@..."),location.href="/"}
-    function getPlace(){window.location.hash="#"+$("#new_session").val(),location.reload()}
-    function goMainSite(){location.href="..."}
-    function new_size() {
-        const nw = $("#new_size_x").val();
-        const nh = $("#new_size_y").val();
-        wsocket.send("size;"+user+";"+session+";"+nw.toString()+";"+nh.toString());
-    }
-    function razPos() {
-        position = '70;68';
-        localStorage.setItem("position", position);
-        $("#place").animate({left:"70px", top:"68px"}, 300);
-    }
-
-    function write_mode(mde) {
-        wsocket.send("writing;"+user+";"+session+";"+mde);
-    }
-
-    function clear_place() {
-        wsocket.send("clear;"+user+";"+session);
-    }
-
-    function return_home() {
-        window.location.hash = "";
-        location.reload();
-    }
-
-
-    eta_draggable = true;
-    function toggleDraggablePlace() {
-        if(eta_draggable) {
-            $("#stopMove").animate({opacity:0.1},150);
-            $('#place').draggable('disable');
-            eta_draggable = false;
-        } else {
-            $("#stopMove").animate({opacity:0.8},150);
-            $('#place').draggable('enable');
-            eta_draggable = true;
-        }
-    }
-
-    // load place
-    var pseudo = localStorage.getItem("username");
-    var user = localStorage.getItem("id");
-
-    if(!user) {
-        $("#home .title").delay(500).animate({opacity:1},300);
-    } else {
-        user = user.toString();
-    }
-
+    user?user=user.toString():$("#home .title").delay(500).animate({opacity:1},300);
     if(window.location.hash) {
         if(!user) {
-            localStorage.setItem("redirect", window.location.hash);
-            window.location.hash = "";
+            localStorage.setItem('redirect', window.location.hash);
+            window.location.hash = '';
             location.reload();
         }
-        $("#home").remove();
-        $(document).keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '114') {
-                window.location.hash = "";
-                location.reload();
-            }
-        });
+        $('#home').remove();
+        $(document).keypress((function(o){'114'==(o.keyCode?o.keyCode:o.which)&&(window.location.hash='',location.reload())}));
 
         // init
-        var c=$("#place"),ctx=c[0].getContext("2d");
-        var px_x=200,px_y=100,place_current_size=[0,0],initColor="#2196f3",currentColor=initColor;
-        saveColor=localStorage.getItem("color"),saveColor&&(initColor=saveColor);
+        var c=$('#place'),ctx=c[0].getContext('2d');
+        var place_current_size=[0,0],initColor='#2196f3',currentColor=initColor;
+        saveColor=localStorage.getItem('color'),saveColor&&(initColor=saveColor);
         var session = window.location.hash.substring(1);
-        var writing, dragposition,position,zoom,mouseX,mouseY,clicked=!0,delayZoom=50,currentZoom=5,maxZoom=24,minZoom=3;
-        var wss_url = "wss://wss-place.anoniji.dev";
-        // ws init
-        var wsocket = new WebSocket(wss_url);
+        var dragposition,position,zoom,mouseX,mouseY,clicked=!0,delayZoom=50,currentZoom=5,maxZoom=24,minZoom=2;
 
-        wsocket.onmessage = (event) => {
-            ws_data = event.data;
+        wsocket.onmessage=e=>{
+            ws_data=e.data;
             if(ws_data.startsWith('place_error')) {
-                error = ws_data.split(';')[1];
-                SnackBar({
-                    fixed: true,
-                    position: 'bc',
-                    message: langpak['key_15'] + error,
-                    status: "danger"
+                error=ws_data.split(";")[1];
+                SnackBar({fixed:!0,position:'bc',message:langpak.key_15+error,status:'danger'});
+            } else if(ws_data.startsWith('user_px')) {
+                user_px=ws_data.split(";")[1];
+                localStorage.setItem("cnt_user",user_px);
+                waitForElm('.cnt_user').then((elm) => {
+                    $(elm).html(user_px);
                 });
             } else if(ws_data.startsWith('place_data')) {
-                wip_eta = ws_data.split(';')[1];
-                place_data = JSON.parse(ws_data.split(';')[2]);
-                place_mode = place_data["mode"];
-                data = place_data["data"];
-                px_x = place_data["width"];
-                px_y = place_data["height"];
-                writing = place_data["writing"];
-                creator = place_data["creator"];
-                if(wip_eta == "T"){
-                    $("#wip").fadeIn(300);
+                wip_eta=ws_data.split(";")[1];
+                place_data=JSON.parse(ws_data.split(";")[2]);
+                place_mode=place_data.mode;
+                data=place_data.data;
+                px_x=place_data.width;
+                px_y=place_data.height;
+                writing=place_data.writing;
+                creator=place_data.creator;
+                "T"==wip_eta&&$("#wip").fadeIn(300);
+
+                if(place_mode=='time') {
+                    $('#general_actions').append('<button class=\'action\' id=\'place_mode\' title=\'Time Mode\'><img src=\'./img/mode_time_icone.png\'></button>');
+                } else if(place_mode=='price') {
+                    $('#general_actions').append('<button class=\'action\' id=\'place_mode\' title=\'Price Mode\'><img src=\'./img/mode_price_icone.png\'></button>');
                 }
 
-                if(place_mode == "time") {
-                    $("#mode").html('<img src="./img/mode_time_icone.png">');
-                } else if(place_mode == "price") {
-                    $("#mode").html('<img src="./img/mode_price_icone.png">');
-                }
+                if(creator==user) {
+                    html="<button onclick=\"change_size('new_size_x', "+px_x+");\">+</button>";
+                    html+="<input id='new_size_x' type='text' value='"+px_x+"' onchange=\"check_size('new_size_x', "+px_x+");\" />";
+                    html+="<button onclick=\"change_size('new_size_y', "+px_y+");\">+</button>";
+                    html+="<input id='new_size_y' type='text' value='"+px_y+"' onchange=\"check_size('new_size_y', "+px_y+");\" />";
+                    html+="<button onclick='new_size();'>"+langpak.key_16+"</button>";
 
-                if(creator == user) {
-                    html = '<input id="new_size_x" type="number" min="' + px_x + '" value="' + px_x + '" size="4" />';
-                    html += '<input id="new_size_y" type="number" min="' + px_y + '" value="' + px_y + '" size="4" />';
-                    html += '<button onclick="new_size();">' + langpak['key_16'] + '</button>';
+                    html+="<select id='place_select_mode' onchange='change_mode()''>";
+
+                    html+="    <option value='free'"
+                    if(place_mode == 'free') {
+                        html+=" selected";
+                    }
+                    html+=">"+langpak.key_41+"</option>"
+
+                    html+="    <option value='time'"
+                    if(place_mode == 'time') {
+                        html+=" selected";
+                    }
+                    html+=">"+langpak.key_42+"</option>"
+
+                    html+="    <option value='price'"
+                    if(place_mode == 'price') {
+                        html+=" selected";
+                    }
+                    html+=">"+langpak.key_43+"</option>"
+
+                    html+="</select>";
 
                     if(writing) {
-                        html += '<button onclick="write_mode(\'F\');">' + langpak['key_17'] +'</button>';
+                        html+="<button onclick=\"write_mode('F');\">"+langpak.key_17+"</button>";
                     } else {
-                        html += '<button onclick="write_mode(\'T\');">' + langpak['key_18'] + '</button>';
+                        html+="<button onclick=\"write_mode('T');\">"+langpak.key_18+"</button>";
                     }
-                    html += '<button onclick="clear_place();">' + langpak['key_19'] + '</button>';
-                    $("#creator").append(html);
+
+                    html+="<button onclick='clear_place();'>"+langpak.key_19+"</button>";
+                    $('#creator').append(html);
                 }
 
                 place_current_size = place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, true, false);
-                SnackBar({
-                    fixed: true,
-                    position: 'bc',
-                    message: langpak['key_20'],
-                    status: "success"
-                });
-                SnackBar({
-                    fixed: true,
-                    position: 'tc',
-                    message: langpak['key_21'] + pseudo,
-                    status: "info"
-                });
+                SnackBar({fixed:!0,position:'bc',message:langpak.key_20,status:'success'});
 
-                if(!writing) {
-                    SnackBar({
-                        fixed: true,
-                        position: 'bc',
-                        message: langpak['key_22'],
-                        status: "info",
-                        timeout: 0
-                    });
-                    $("#overlay_add").remove();
-                    $("#stopMove").css("bottom","188px");
-                    $("#razPos").css("bottom","128px");
-                    $("#zoomUp").css("bottom","68px");
-                    $("#zoomDown").css("bottom","8px");
+                if(writing) {
+                    SnackBar({fixed:!0,position:'tr',message:pseudo,timeout:0,actions:[{text:'cnt_user:',function:function(){SnackBar({fixed:!0,position:'tr',message:langpak.key_37,timeout:1e4})}},{text:langpak.key_33,function:function(){getLogout()}}]});
+                } else {
+                    SnackBar({fixed:!0,position:'tr',message:langpak.key_22,status:'warning',icon:'!',timeout:0});
+                    $('#overlay_add').remove();
+                    $('#poss_info').css('bottom','305px');
+                    $('#return_home').css('bottom','248px');
+                    $('#stopMove').css('bottom','188px');
+                    $('#razPos').css('bottom','128px');
+                    $('#zoomUp').css('bottom','68px');
+                    $('#zoomDown').css('bottom','8px');
                 }
+
+                $('#loading').hide();
             } else if(ws_data.startsWith('new_size')) {
                 place_data = ws_data.split(';');
                 from_session = place_data[1];
@@ -748,12 +672,7 @@
                     px_x = place_data[2];
                     px_y = place_data[3];
                     place_current_size = place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, true, false);
-                    SnackBar({
-                        fixed: true,
-                        position: 'bc',
-                        message: langpak['key_23'],
-                        status: "info"
-                    });
+                    SnackBar({fixed:!0,position:'bc',message:langpak.key_23,status:'info'});
                 }
             } else if(ws_data.startsWith('new_px')) {
                 lst_data = ws_data.split(';');
@@ -776,84 +695,45 @@
                     delete data[p_poss];
                     place_current_size = place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, false, false);
                 }
-
             } else if(ws_data.startsWith('write_change')) {
                 lst_data = ws_data.split(';');
                 p_sess = lst_data[2];
                 if (session == p_sess) {
-                    SnackBar({
-                        fixed: true,
-                        position: 'bc',
-                        message: langpak['key_24'],
-                        status: "info"
-                    });
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
+                    SnackBar({fixed:!0,position:'bc',message:langpak.key_24,status:'info'});
+                    setTimeout((function(){location.reload()}),1e3);
                 }
-
+            } else if(ws_data.startsWith('mode_change')) {
+                lst_data = ws_data.split(';');
+                p_sess = lst_data[2];
+                if (session == p_sess) {
+                    SnackBar({fixed:!0,position:'bc',message:langpak.key_44,status:'info'});
+                    setTimeout((function(){location.reload()}),1e3);
+                }
             } else if(ws_data.startsWith('del_all_px')) {
                 lst_data = ws_data.split(';');
                 p_sess = lst_data[2];
                 if (session == p_sess) {
                     data = {};
                     place_current_size = place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, false, false);
-                    SnackBar({
-                        fixed: true,
-                        position: 'bc',
-                        message: langpak['key_25'],
-                        status: "info"
-                    });
+                    SnackBar({fixed:!0,position:'bc',message:langpak.key_25,status:'info'});
                 }
-
             } else if(ws_data.startsWith('place_create')) {
-
                 lst_data = ws_data.split(';');
                 p_sess = lst_data[1];
-                SnackBar({
-                    fixed: true,
-                    position: 'bc',
-                    message: langpak['key_26'] + p_sess + langpak['key_27'],
-                    status: "info",
-                    timeout: 0
-                });
-                setTimeout(function() {
-                    location.reload();
-                }, 5000);
-
+                SnackBar({fixed:!0,position:'tc',message:langpak.key_26+p_sess+langpak.key_27,status:'info',timeout:0});
+                setTimeout((function(){location.reload()}),5e3);
             } else {
                 console.log(ws_data);
             }
         }
 
-        wsocket.onclose = function (msg) {
-            $("section").fadeOut(300);
-            SnackBar({
-                fixed: true,
-                position: 'bc',
-                message: langpak['key_28'],
-                status: "warning"
-            });
-            setTimeout(function() {
-                location.reload();
-            }, 5000);
-        };
-
         // place init data
-        var data = {
-            "1-1": {
-                "color": "#2196f3",
-                "user": user,
-                "price": 1,
-                "last_update": new Date().toLocaleString()
-            }
-        }
-
+        var data={};
         function place_draw(ctx, data, px_size, px_x, px_y, place_current_size, first_load=false, zoom=false) {
             var place_w = parseInt(px_size * px_x, 10);
             var place_h = parseInt(px_size * px_y, 10);
 
-            ctx.canvas.height=place_h,ctx.canvas.width=place_w,ctx.lineWidth=1,ctx.strokeStyle="#00000020";
+            ctx.canvas.height=place_h,ctx.canvas.width=place_w,ctx.lineWidth=1,ctx.strokeStyle='#00000020';
             var nb_l=parseInt(place_h/px_size,10),nb_c=parseInt(place_w/px_size,10),cnt_l=0,cnt_c=0;
 
             for(;cnt_l<=nb_l;)ctx.beginPath(),ctx.moveTo(0,px_size*cnt_l),ctx.lineTo(place_w,px_size*cnt_l),ctx.stroke(),cnt_l++;
@@ -871,11 +751,11 @@
                     position = position.split(';');
                     $('#place').css({'left': parseFloat(position[0]), 'top': parseFloat(position[1])});
                 } else {
-                    $("#place").css("top","calc(50% - "+place_h/2+"px)").css("left","calc(50% - "+place_w/2+"px)");
+                    $('#place').css('top','calc(50% - '+place_h/2+'px)').css('left','calc(50% - '+place_w/2+'px)');
                 }
-                $("#session").fadeIn(300);
+                $('#session').fadeIn(300);
             } else if (zoom) {
-                position = $("#place").position();
+                position = $('#place').position();
                 position = [position.top, position.left];
 
                 var w = parseInt(place_current_size[0], 10);
@@ -889,185 +769,201 @@
                 var calc_h = parseInt(position[0] - ((place_h - place_current_size[1]) / cur_h), 10)
 
                 // recadrage pour le zoom
-                $("#place").css("top",calc_h.toString()+"px").css("left",calc_w.toString()+"px");
+                $('#place').css('top',calc_h.toString()+'px').css('left',calc_w.toString()+'px');
 
                 position = calc_h.toString() + ';' + calc_w.toString();
-                localStorage.setItem("position", position);
+                localStorage.setItem('position', position);
             }
             return [place_w, place_h];
         }
 
         zoom = localStorage.getItem('zoom');
-        if(zoom) {
-            currentZoom = parseInt(zoom,10);
-        }
+        zoom&&(currentZoom=parseInt(zoom,10));
 
         // zoom
         function zoomUp() {
-            place_current_size = place_draw(ctx, data, (currentZoom += 1), px_x, px_y, place_current_size, false, true);
-            if (currentZoom > maxZoom) {
-                currentZoom = maxZoom;
-                place_current_size = place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, false, true);
-            }
-            localStorage.setItem("zoom", currentZoom.toString());
+            $('#loading').show();
+            place_current_size=place_draw(ctx,data,currentZoom+=1,px_x,px_y,place_current_size,!1,!0),currentZoom>maxZoom&&(currentZoom=maxZoom,place_current_size=place_draw(ctx,data,currentZoom,px_x,px_y,place_current_size,!1,!0));
+            localStorage.setItem('zoom', currentZoom.toString());
+            $('#loading').hide();
         }
 
         function zoomDown() {
-            place_current_size = place_draw(ctx, data, (currentZoom -= 1), px_x, px_y, place_current_size, false, true);
-            if (currentZoom < minZoom) {
-                currentZoom = minZoom;
-                place_current_size = place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, false, true);
-            }
-            localStorage.setItem("zoom", currentZoom.toString());
+            $('#loading').show();
+            place_current_size=place_draw(ctx,data,currentZoom-=1,px_x,px_y,place_current_size,!1,!0),currentZoom<minZoom&&(currentZoom=minZoom,place_current_size=place_draw(ctx,data,currentZoom,px_x,px_y,place_current_size,!1,!0));
+            localStorage.setItem('zoom', currentZoom.toString());
+            $('#loading').hide();
         }
 
         $(document).bind('mousewheel DOMMouseScroll', function(e){
-            if(e.originalEvent.wheelDelta /120 > 0) {
-                zoomUp();
-            }
-            else{
-                zoomDown();
-            }
-            localStorage.setItem("zoom", currentZoom.toString());
-        }).on("mousedown", function (e1) {
-            $(document).one("mouseup", function (e2) {
+            e.originalEvent.wheelDelta/120>0?zoomUp():zoomDown();
+            localStorage.setItem('zoom', currentZoom.toString());
+        }).on('mousedown', function (e1) {
+            $(document).one('mouseup', function (e2) {
                 e2.preventDefault();
                 if (e1.which == 2 && e1.target == e2.target) {
+                    $('#loading').show();
                     currentZoom = 5;
                     place_current_size = place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, false, true);
-                    localStorage.setItem("zoom", currentZoom.toString());
+                    localStorage.setItem('zoom', currentZoom.toString());
                     razPos();
+                    $('#loading').hide();
                 }
             });
         });
 
         // color pic
-        $(".colorPickSelector").colorPick({initialColor:initColor,allowRecent:!0,recentMax:5,allowCustomColor:!0,palette:["#f44336","#e91e63","#9c27b0","#673ab7","#3f51b5","#2196f3","#03a9f4","#00bcd4","#4caf50","#8bc34a","#cddc39","#ffeb3b","#ffc107","#ff9800","#ff5722","#795548","#9e9e9e","#607d8b","#000000", "#ffffff"],onColorSelected:function(){this.element.css({backgroundColor:this.color,color:this.color}),currentColor=this.color,localStorage.setItem("color",currentColor)}});
+        $('.colorPickSelector').colorPick({initialColor:initColor,allowRecent:!0,recentMax:8,allowCustomColor:!0,palette:['#FF8A80', '#FF5252', '#FF1744', '#D50000', '#FF80AB', '#FF4081', '#F50057', '#C51162', '#EA80FC', '#E040FB', '#D500F9', '#AA00FF', '#B388FF', '#7C4DFF', '#651FFF', '#6200EA', '#8C9EFF', '#536DFE', '#3D5AFE', '#304FFE', '#82B1FF', '#448AFF', '#2979FF', '#2962FF', '#80D8FF', '#40C4FF', '#00B0FF', '#0091EA', '#84FFFF', '#18FFFF', '#00E5FF', '#00B8D4', '#A7FFEB', '#64FFDA', '#1DE9B6', '#00BFA5', '#B9F6CA', '#69F0AE', '#00E676', '#00C853', '#CCFF90', '#B2FF59', '#76FF03', '#64DD17', '#F4FF81', '#EEFF41', '#C6FF00', '#AEEA00', '#FFFF8D', '#FFFF00', '#FFEA00', '#FFD600', '#FFE57F', '#FFD740', '#FFC400', '#FFAB00', '#FFD180', '#FFAB40', '#FF9100', '#FF6D00', '#FF9E80', '#FF6E40', '#FF3D00', '#DD2C00', '#6D4C41', '#5D4037', '#4E342E', '#3E2723', '#757575', '#616161', '#424242', '#212121', '#546E7A', '#455A64', '#37474F', '#263238', '#000000', '#FFFFFF'],onColorSelected:function(){this.element.css({backgroundColor:this.color,color:this.color}),currentColor=this.color,localStorage.setItem('color',currentColor)}});
+
+        // zplace colors ['#000000', '#333434', '#D4D7D9', '#FFFFFF', '#6D302F', '#9C451A', '#6D001A', '#BE0027', '#FF2651', '#FF2D00', '#FFA800', '#FFB446', '#FFD623', '#FFF8B8', '#7EED38', '#00CC4E', '#00A344', '#598D5A', '#004B6F', '#009EAA', '#00CCC0', '#33E9F4', '#5EB3FF', '#245AEA', '#313AC1', '#1832A4', '#511E9F', '#6A5CFF', '#33E9F4', '#B44AC0', '#FF63AA', '#E4ABFF']
 
         // add px
-        function getCursorPosition(canvas, event, drop=false) {
+        function getCursorPosition(canvas,event,drop=false) {
             if (!writing) {
                 return;
             }
-            const rect = canvas.getBoundingClientRect()
-            var x = event.clientX - rect.left;
-            var y = event.clientY - rect.top;
-            x = parseInt(x, 10) - (x % currentZoom);
-            y = parseInt(y, 10) - (y % currentZoom);
+            const rect=canvas.getBoundingClientRect()
+            var x=event.clientX-rect.left;
+            var y=event.clientY-rect.top;
+            x=parseInt(x,10)-(x%currentZoom);
+            y=parseInt(y,10)-(y%currentZoom);
 
-            ctx.fillStyle = currentColor;
-            ctx.fillRect(Math.ceil(x), Math.ceil(y), currentZoom, currentZoom);
-
-            poss = Math.ceil(x/currentZoom).toString() + '-' + Math.ceil(y/currentZoom).toString();
+            poss=Math.ceil(x/currentZoom).toString()+'-'+Math.ceil(y/currentZoom).toString();
 
             if (drop) {
                 if (poss in data) {
-                    wsocket.send("remove;" + user + ";" + session + ";" + poss);
-                    delete data[poss];
-                    place_draw(ctx, data, currentZoom, px_x, px_y, place_current_size, false, false);
+                    wsocket.send('remove;'+user+';'+session+';'+poss);
+                    if(creator==user) {
+                        delete data[poss];
+                        place_draw(ctx,data,currentZoom,px_x,px_y,place_current_size,!1,!1);
+                    }
                 }
             } else {
-                data[poss] = {
-                    "color": currentColor,
-                    "user": user,
-                    "price": 1,
-                    "last_update": new Date().toLocaleString()
+                price = 1;
+                if(place_mode=='time') {
+                    if(poss in data) {
+                        const dnow = new Date();
+                        const date = new Date(data[poss].last_update);
+                        const diff = Math.floor((dnow - date) / 1000);
+                        if (diff < delta_pxs) {
+                            SnackBar({fixed:!0,position:'bc',message:langpak.key_45,status:'info'});
+                            return;
+                        }
+                    }
+                } else if(place_mode=='price') {
+                    var cnt_user=localStorage.getItem('cnt_user');
+                    if (!cnt_user) {
+                        SnackBar({fixed:!0,position:'bc',message:langpak.key_38,status:'danger'});
+                        return;
+                    }
+                    if (poss in data) {
+                        price = data[poss].price;
+                    }
+                    cnt_next = parseInt(cnt_user, 10) - price;
+                    if (cnt_next<=0) {
+                        SnackBar({fixed:!0,position:'bc',message:langpak.key_39,status:'danger'});
+                        return;
+                    }
+
                 }
-                wsocket.send("add;" + user + ";" + session + ";" + poss + ";" + JSON.stringify(data[poss]));
+                ctx.fillStyle=currentColor;
+                ctx.fillRect(Math.ceil(x),Math.ceil(y),currentZoom,currentZoom);
+                data[poss]={color:currentColor,user:user,price:(price+1),last_update:(new Date).toUTCString()};
+                new Audio('./musics/click.mp3').play();
+                wsocket.send('add;'+user+';'+session+';'+poss+';'+JSON.stringify(data[poss]));
             }
+
             $.map(data, function(values, key) {
-                poss = key.split('-')
-                ctx.fillStyle = values['color'];
-                ctx.fillRect(poss[0] * currentZoom, poss[1] * currentZoom, currentZoom, currentZoom);
+                poss=key.split('-')
+                ctx.fillStyle=values['color'];
+                ctx.fillRect(poss[0]*currentZoom,poss[1]*currentZoom,currentZoom,currentZoom);
             });
         }
 
         const canvas = document.querySelector('canvas');
-        canvas.addEventListener('dblclick', function(e) {
-            getCursorPosition(canvas, e);
-        })
-
-        canvas.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            getCursorPosition(canvas, e, true);
-        })
+        canvas.addEventListener('dblclick',(function(n){getCursorPosition(canvas,n)}));
+        canvas.addEventListener('contextmenu',(function(n){n.preventDefault(),getCursorPosition(canvas,n,!0)}));
 
         // cursor tracking ---------------------------------->
-        $("#place").mousemove(function(e) {
-            const rect = canvas.getBoundingClientRect()
-            var clientX = event.clientX;
-            var clientY = event.clientY;
-
-            var x = clientX - rect.left;
-            var y = clientY - rect.top;
+        $('#place').mousemove(function(e) {
+            const rect=canvas.getBoundingClientRect();
+            var clientX=event.clientX,clientY=event.clientY;
+            var x=clientX-rect.left,y=clientY-rect.top;
             x = parseInt((x/currentZoom)+1, 10);
             y = parseInt((y/currentZoom)+1, 10);
 
-            key = parseInt(x - 1, 10).toString() + "-" + parseInt(y - 1, 10).toString();
-            $("#poss_info").html("x: " + x.toString() + " | y: " + y.toString());
+            key=parseInt(x-1,10).toString()+'-'+parseInt(y-1,10).toString();
+            $('#poss_info').html(x.toString()+' | '+y.toString());
 
-            if(key in data) {
-                html = "<div>" + langpak['key_29'] + data[key]['color'] + "</div>";
-                // html += "<div>" + langpak['key_30'] + data[key]['user'] + "</div>";
-                // html += "<div>" + langpak['key_31'] + data[key]['price'] + "</div>";
-                html += "<div>" + langpak['key_32'] + data[key]['last_update'] + "</div>";
-                $("#px_info").css("top",clientY.toString()+"px").css("left",clientX.toString()+"px").html(html).css("opacity", "0.8");
+            if(writing && key in data) {
+                html='<div>'+langpak.key_29+data[key].color+'</div>';
+                // html+='<div>'+langpak.key_30+data[key].user+'</div>';
+                if(place_mode=='price') {
+                    html+='<div>'+langpak.key_31+data[key].price+'</div>';
+                }
+                else if(place_mode=='time') {
+                    const dnow = new Date();
+                    const date = new Date(data[key].last_update);
+                    const diff = Math.floor((dnow - date) / 1000);
+                    if (diff < delta_pxs) {
+                        html+='<div>'+langpak.key_46+(delta_pxs - diff)+langpak.key_47+'</div>';
+                    }
+                }
+                html+='<div>'+langpak.key_32+data[key].last_update+'</div>';
+                $('#px_info').css('top',clientY.toString()+'px').css('left',clientX.toString()+'px').html(html).css('opacity', '0.8');
             } else {
-                $("#px_info").css("opacity", "0.0").html("");
+                $('#px_info').css('opacity','0.0').html('');
             }
-
         }).mouseleave(function() {
-            $("#poss_info").html("");
-            $("#px_info").css("opacity", "0.0").html("");
+            $('#poss_info').html('');
+            $('#px_info').css('opacity','0.0').html('');
         });
         // cursor tracking ---------------------------------->
 
         // interface actions
         $(document).ready(function(){
-            $( "#place" ).draggable({
-                drag: function(event,ui){
-                    position = parseInt(ui.position['left'], 10).toString() + ';' + parseInt(ui.position['top'], 10).toString()
-                    localStorage.setItem("position", position);
+            $('#place').draggable({
+                drag:function(event,ui){
+                    position=parseInt(ui.position.left,10).toString()+';'+parseInt(ui.position.top,10).toString();
+                    localStorage.setItem('position',position);
                 },
-                start: function(event,ui) {
-                    clicked = false;
+                start:function(event,ui){
+                    clicked=!1;
                 }
-            }).click(function(){
-                clicked = true;
-            }).dblclick(function(){
-                clicked = true;
-            });
+            }).click((function(){clicked=!0})).dblclick((function(){clicked=!0}));
             $(document).mousemove((function(e){mouseX=e.pageX,mouseY=e.pageY})).mouseover();
         });
-        wsocket.onopen = (event) => {
-            wsocket.send("load;" + user + ";" + session);
+        wsocket.onopen=s=>{
+            wsocket.send('init;'+user);
+            wsocket.send('load;'+user+';'+session);
+            $('#loading').show();
         };
     } else if (user) {
-        var redirect = localStorage.getItem("redirect");
-        if (redirect) {
-            window.location.hash = redirect;
-            location.reload();
-            localStorage.removeItem("redirect");
-        }
-
-        $("#home").append("<button id='logout' class='rth' onclick='getLogout();' title='" + langpak['key_33'] + "'>" + langpak['key_34'] + pseudo + "</button>")
-
-
-        $("#home .title").delay(500).animate({'opacity': 1.0}, 300);
-        $("#go_auth, #go_gest").remove();
-        $("#go_place, #new_session").show();
-        $("#go_place").click(function() {
-            getPlace();
-        });
-        $("#new_session").keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13') {
-                window.location.hash = "#" + $("#new_session").val();
-                location.reload();
+        var redirect=localStorage.getItem('redirect');
+        redirect&&(window.location.hash=redirect,location.reload(),localStorage.removeItem('redirect'));
+        wsocket.onopen=e=>{user&&wsocket.send('init;'+user),wsocket.send('list;'+user)};
+        wsocket.onmessage=e=>{
+            ws_data=e.data;
+            if(ws_data.startsWith('user_px')) {
+                user_px=ws_data.split(';')[1];
+                localStorage.setItem('cnt_user',user_px);
+                $('.cnt_user').html(user_px);
+            } else if(ws_data.startsWith('place_list')) {
+                place_list=ws_data.split(";")[1];
+                place_list=place_list.replaceAll("'", '"');
+                place_list=JSON.parse(place_list);
+                $.each(place_list, function(key, value){
+                    $('#place_list').append('<div onclick="place_select(\'' + value + '\');">' + value + '<div>')
+                });
             }
-        }).focus();
+        };
+        SnackBar({fixed:!0,position:'tc',message:pseudo,timeout:0,actions:[{text:'cnt_user:',function:function(){SnackBar({fixed:!0,position:'bc',message:langpak.key_37,timeout:1e4})}},{text:langpak.key_33,function:function(){getLogout()}}]});
+        $('#home .title').delay(500).animate({opacity:1},300);
+        $('#go_auth, #go_gest').remove();
+        $('#go_place, #new_session, #place_list').show();
+        $('#go_place').click((function(){getPlace()}));
+        $('#new_session').keypress((function(o){'13'==(o.keyCode?o.keyCode:o.which)&&(window.location.hash='#'+$('#new_session').val(),location.reload())})).focus();
     }
 </script>
-
 
 </html>

@@ -7,13 +7,17 @@ error_reporting(E_ALL);
 
 $code = isset($_REQUEST['code']) ? $_REQUEST['code'] : '';
 
-define('OAUTH2_CLIENT_ID', '');
-define('OAUTH2_CLIENT_SECRET', '');
+// Config file
+$json = file_get_contents('./config.json');
+$json_data = json_decode($json, true);
+
+define('OAUTH2_CLIENT_ID', $json_data['discord']['OAUTH2_CLIENT_ID']);
+define('OAUTH2_CLIENT_SECRET', $json_data['discord']['OAUTH2_CLIENT_SECRET']);
 
 $authorizeURL = 'https://discord.com/api/oauth2/authorize';
 $tokenURL = 'https://discord.com/api/oauth2/token';
 $apiURLBase = 'https://discord.com/api/users/@me';
-$redirectURL = 'https://..................../auth';
+$redirectAUTH = $json_data['discord']['redirectAUTH'];
 if(get('code')) {
 
   session_start();
@@ -23,7 +27,7 @@ if(get('code')) {
     "grant_type" => "authorization_code",
     'client_id' => OAUTH2_CLIENT_ID,
     'client_secret' => OAUTH2_CLIENT_SECRET,
-    'redirect_uri' => $redirectURL,
+    'redirect_uri' => $redirectAUTH,
     'code' => get('code')
   ));
   $logout_token = $token->access_token;
@@ -35,10 +39,18 @@ if(get('code')) {
     localStorage.setItem("id", "<?= $user->id; ?>");
     localStorage.setItem("username", "<?= $user->username; ?>");
     localStorage.setItem("email", "<?= $user->email; ?>");
-    setTimeout(function() {
-        location.href = "https://..................../";
-    }, 3000);
 
+    function checkStorage() {
+        userid = localStorage.getItem("id");
+        if(userid) {
+            location.href = "<?= $json_data['discord']['redirectURL']; ?>";
+        } else {
+            setTimeout(function() {
+                checkStorage();
+            }, 500);
+        }
+    }
+    checkStorage();
 </script>
 
 Redirecting....
