@@ -31,7 +31,7 @@ if os.path.isfile(file_config):
     delta_pxs = conf['place']['delta_pxs']
     saveL_pxs = conf['place']['saveL_pxs']
     modes = conf['place']['modes']
-    wip = conf['place']['wip'] # T (True)/F (False)
+    wip = conf['place']['wip']
 else:
     print('not_found', file_config)
     sys.exit(0)
@@ -111,7 +111,7 @@ def getUserPX(client_id):
 
 
 async def handler(websocket, path):
-    global trace, places, users, clients, wip, modes, pos, delta_pxs
+    global trace, places, users, clients, wip, modes, pos, delta_pxs, guests
 
     if trace:
         print('new_client>')
@@ -144,6 +144,9 @@ async def handler(websocket, path):
                 }
                 await websocket.send('user_px;' + userPx)
 
+                if wip:
+                    await websocket.send('wip')
+
             elif msg.startswith("load"):
                 tag, user, session = msg.split(';')
                 if session.strip() == '':
@@ -155,7 +158,7 @@ async def handler(websocket, path):
                     continue
 
                 elif session in places:
-                    await websocket.send('place_data;' + wip + ';' + json.dumps(places[session]))
+                    await websocket.send('place_data;' + json.dumps(places[session]))
                     continue
 
                 else:
