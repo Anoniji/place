@@ -375,11 +375,6 @@
 </head>
 
 <body>
-    <section id='wip'>
-        <span class='key_01'>Maintenance in progress</span>
-        <div class='lds-ellipsis'><div></div><div></div><div></div><div></div></div>
-    </section>
-
     <section id='general_actions'>
         <div id='loading'><div class='key_40'>Loading</div></div>
         <audio loop src="./musics/SouMix & Bromar - Falling For You [NCS Release].mp3"></audio>
@@ -459,9 +454,13 @@ Watch: http://youtu.be/'>
 </body>
 
 <script type='text/javascript'>
+    // init
+    allow_guest(true);
+
     // init vars
     var _URL=window.URL||window.webkitURL;
-    var wss_url='wss://wss-place.anoniji.dev';
+    var wss_url='';
+    var discord_auth_url='';
     var wsocket = new WebSocket(wss_url);
     var px_x=100,px_y=100,max_size=500,delta_pxs=300,writing,file,img,langpak,eta_draggable=!0;
 
@@ -499,35 +498,10 @@ Watch: http://youtu.be/'>
         $('#cr').animate({'color': 'rgb(254, 254, 254, .8)'}, 300);
     }
 
-    function dark_mode() {
-        var lightmode = localStorage.getItem('lightmode');
-        if(lightmode) {
-            $('#dark_mode').html('<img src=\'./img/sun_icon.png\'>');
-            $('body').animate({'background-color': '#1c2024'}, 300);
-            $('#home .title, #cr').animate({'color': 'rgb(254, 254, 254, .8)'}, 300);
-            localStorage.removeItem('lightmode');
-        } else {
-            $('#dark_mode').html('<img src=\'./img/moon_icon.png\'>');
-            $('body').animate({'background-color': '#e3e3e3'}, 300);
-            $('#home .title, #cr').animate({'color': 'rgb(0, 0, 0, .8)'}, 300);
-            localStorage.setItem('lightmode', 'enable');
-        }
-    }
-
-    // music player
-    function music_player() {
-        const audio = document.querySelector("audio");
-        if (audio.paused) {
-            audio.volume = 0.1;
-            audio.play();
-            $('#music_player').html('<img src=\'./img/stop_icon.png\'>').animate({opacity:.8},150)
-        } else {
-            audio.pause();
-            $('#music_player').html('<img src=\'./img/play_icon.png\'>').animate({opacity:.1},150)
-        }
-    }
-
-    // function minified
+    // function minified ---------------------------------------------------------------------------------------------------------
+    function allow_guest(e){e||$("#go_gest").remove()}
+    function dark_mode(){localStorage.getItem("lightmode")?($("#dark_mode").html("<img src='./img/sun_icon.png'>"),$("body").animate({"background-color":"#1c2024"},300),$("#home .title, #cr").animate({color:"rgb(254, 254, 254, .8)"},300),localStorage.removeItem("lightmode")):($("#dark_mode").html("<img src='./img/moon_icon.png'>"),$("body").animate({"background-color":"#e3e3e3"},300),$("#home .title, #cr").animate({color:"rgb(0, 0, 0, .8)"},300),localStorage.setItem("lightmode","enable"))}
+    function music_player(){const i=document.querySelector("audio");i.paused?(i.volume=.1,i.play(),$("#music_player").html("<img src='./img/stop_icon.png'>").animate({opacity:.8},150)):(i.pause(),$("#music_player").html("<img src='./img/play_icon.png'>").animate({opacity:.1},150))}
     function getRandomInt(n){return Math.floor(Math.random()*n)}
     function containsOnlyNumbers(n){return/^\d+$/.test(n)}
     function change_size(i,e){size=$("#"+i).val(),containsOnlyNumbers(size)?(size=parseInt(size,10)+10,size>max_size&&(size=max_size),$("#"+i).val(size.toString())):$("#"+i).val(e.toString())}
@@ -535,7 +509,7 @@ Watch: http://youtu.be/'>
     function change_mode(){new_mode=$("#place_select_mode").val(),wsocket.send("mode;"+user+";"+session+";"+new_mode)}
     function helper(e){writing?$(".key_12").show():$(".key_12").hide(),$("#helper").fadeToggle(300)}
     function getLogout(){localStorage.removeItem('id'),localStorage.removeItem('username'),localStorage.removeItem('email'),location.href='/'}
-    function getAuthDiscord(){location.href='https://discord.com/api/oauth2/authorize?client_id=1022156371262722189&redirect_uri=https%3A%2F%2Fplace.anoniji.dev%2Fauth&response_type=code&scope=identify%20email'}
+    function getAuthDiscord(){location.href=discord_auth_url}
     function getAuthGuest(){var e='guest_'+getRandomInt(5e5).toString();localStorage.setItem('id',e),localStorage.setItem('username',e),localStorage.setItem('email',e+'@anoniji.dev'),location.href='/'}
     function getPlace(){window.location.hash='#'+$('#new_session').val(),location.reload()}
     function goMainSite(){location.href='https://github.com/Anoniji/place'}
@@ -549,20 +523,11 @@ Watch: http://youtu.be/'>
     function overlay_checked(){$('#overlay_checked').hide(),$('#place').fadeIn(300),$('#overlay').draggable('disable').resizable('disable'),$('#overlay img').css('cursor','default')}
     function waitForElm(e){return new Promise((t=>{if(document.querySelector(e))return t(document.querySelector(e));const r=new MutationObserver((o=>{document.querySelector(e)&&(t(document.querySelector(e)),r.disconnect())}));r.observe(document.body,{childList:!0,subtree:!0})}))}
     function place_select(e){$("#new_session").val(e)}
-
-    // overlay ------------------------------------------>
+    function wip_show(){SnackBar({fixed:!0,position:"tl",message:langpak.key_01,status:"info",timeout:0})}
     function openDialog(){document.getElementById('fileid').click()}
-    $('#fileid').change(function(e) {
-        if ((file = this.files[0])) {
-            img = new Image();
-            img.onload=function(){$('#overlay').css({top:'68px',left:'70px',width:parseInt(this.width,10),height:parseInt(this.height,10)})};
-            img.onerror=function(){SnackBar({fixed:!0,position:'bc',message:langpak.key_14+type,status:'danger'})};
-            img.src = _URL.createObjectURL(file)
-            $('#overlay_checked').show(),$('#overlay img').attr('src',img.src).css('cursor','all-scroll'),$('#overlay_add').html('<img src=\'./img/recyclebin_icon.png\'>').attr('onclick','resetOverlay();').css({opacity:.9}),$('#place').fadeOut(300);
-        }
-    });
+    $("#fileid").change((function(e){(file=this.files[0])&&(img=new Image,img.onload=function(){$("#overlay").css({top:"68px",left:"70px",width:parseInt(this.width,10),height:parseInt(this.height,10)})},img.onerror=function(){SnackBar({fixed:!0,position:"bc",message:langpak.key_14+type,status:"danger"})},img.src=_URL.createObjectURL(file),$("#overlay_checked").show(),$("#overlay img").attr("src",img.src).css("cursor","all-scroll"),$("#overlay_add").html("<img src='./img/recyclebin_icon.png'>").attr("onclick","resetOverlay();").css({opacity:.9}),$("#place").fadeOut(300))}));
     $('#overlay').draggable().resizable({aspectRatio:!0});
-    // overlay ------------------------------------------>
+    // function minified ---------------------------------------------------------------------------------------------------------
 
     user?user=user.toString():$("#home .title").delay(500).animate({opacity:1},300);
     if(window.location.hash) {
@@ -583,7 +548,9 @@ Watch: http://youtu.be/'>
 
         wsocket.onmessage=e=>{
             ws_data=e.data;
-            if(ws_data.startsWith('place_error')) {
+            if(ws_data == 'wip') {
+                wip_show();
+            } else if(ws_data.startsWith('place_error')) {
                 error=ws_data.split(";")[1];
                 SnackBar({fixed:!0,position:'bc',message:langpak.key_15+error,status:'danger'});
             } else if(ws_data.startsWith('user_px')) {
@@ -593,15 +560,13 @@ Watch: http://youtu.be/'>
                     $(elm).html(user_px);
                 });
             } else if(ws_data.startsWith('place_data')) {
-                wip_eta=ws_data.split(";")[1];
-                place_data=JSON.parse(ws_data.split(";")[2]);
+                place_data=JSON.parse(ws_data.split(";")[1]);
                 place_mode=place_data.mode;
                 data=place_data.data;
                 px_x=place_data.width;
                 px_y=place_data.height;
                 writing=place_data.writing;
                 creator=place_data.creator;
-                "T"==wip_eta&&$("#wip").fadeIn(300);
 
                 if(place_mode=='time') {
                     $('#general_actions').append('<button class=\'action\' id=\'place_mode\' title=\'Time Mode\'><img src=\'./img/mode_time_icone.png\'></button>');
@@ -944,7 +909,9 @@ Watch: http://youtu.be/'>
         wsocket.onopen=e=>{user&&wsocket.send('init;'+user),wsocket.send('list;'+user)};
         wsocket.onmessage=e=>{
             ws_data=e.data;
-            if(ws_data.startsWith('user_px')) {
+            if(ws_data == 'wip') {
+                wip_show();
+            } else if(ws_data.startsWith('user_px')) {
                 user_px=ws_data.split(';')[1];
                 localStorage.setItem('cnt_user',user_px);
                 $('.cnt_user').html(user_px);
