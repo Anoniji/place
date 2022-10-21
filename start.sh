@@ -1,0 +1,1 @@
+truncate -s 0 nohup.out && nohup python3 ws.py &

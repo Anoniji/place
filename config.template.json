@@ -4,13 +4,15 @@
         "port": 5358,
         "trace": false,
         "compress": true,
-        "start_pxs": 300,
+        "start_pxs": 3,
         "delta_pxs": 300,
         "saveL_pxs": 30,
         "modes": ["free", "time", "price"],
-        "wip": "F"
+        "wip": false
     },
     "discord": {
+        "start_pxs": 30,
+        "BOT_TOKEN": "",
         "OAUTH2_CLIENT_ID": "",
         "OAUTH2_CLIENT_SECRET": "",
         "redirectAUTH": "/auth",
