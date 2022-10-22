@@ -348,7 +348,7 @@ async def handler(websocket, path):
                 else:
                     await websocket.send('place_error;Not found')
 
-    except Exception as e:
+    except Exception:
         if trace:
             exc_type, exc_obj, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
