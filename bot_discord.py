@@ -71,14 +71,12 @@ async def on_message(message):
         return
 
     updateUserPX(message.author.id)
-    if message.content.startswith('!place points'):
-        print('<1>')
+    if message.content.startswith('!place pxs'):
         msg = """```Markdown
 # """ + getUserPX(message.author.id) + """ pxs```"""
         await message.channel.send(msg)
 
     elif message.content.startswith('!place'):
-        print('<2>')
         msg = """```Markdown
 # Place bot v1```"""
         await message.channel.send(msg)

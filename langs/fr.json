@@ -4,7 +4,7 @@
     "key_03": "Se rendre sur le Place",
     "key_04": "Authentification avec Discord",
     "key_05": "Compte invité",
-    "key_06": "créé par Anoniji - version 0.2 (beta4)",
+    "key_06": "créé par Anoniji - version 1.0",
     "key_07": "Retour à l'accueil",
     "key_08": "Activer/Désactiver le déplacement du Place",
     "key_09": "Déplacer le Place en haut à gauche",
@@ -35,7 +35,7 @@
     "key_34": "connecté en tant que",
     "key_35": "Confirmez-vous l'action ?",
     "key_36": "Activer/désactiver le mode sombre",
-    "key_37": "Pour gagner des points, rendez vous sur des serveurs Discord ayant le bot ''Place''",
+    "key_37": "Pour gagner des points, rendez vous sur des serveurs Discord ayant le bot ''Place''. Les points seront ajoutés au changement de page.",
     "key_38": "Vous n'avez pas de point",
     "key_39": "Vous n'avez pas asser de point",
     "key_40": "Chargement...",
@@ -45,5 +45,6 @@
     "key_44": "Le mode du Place a changé, rechargement du Place...",
     "key_45": "Ce pixel n'est pas encore disponible",
     "key_46": "Il faut attendre encore ",
-    "key_47": " secondes"
+    "key_47": " secondes",
+    "key_48": "Fermer"
 }

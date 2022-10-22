@@ -176,7 +176,7 @@ async def handler(websocket, path):
                             content = r'{}'
 
                         places[session] = content
-                        await websocket.send('place_data;' + wip + ';' + json.dumps(content))
+                        await websocket.send('place_data;' + json.dumps(content))
 
                     elif os.path.isfile(file_session):
                         if trace:
@@ -188,7 +188,7 @@ async def handler(websocket, path):
 
                         content = json.loads(content)
                         places[session] = content
-                        await websocket.send('place_data;' + wip + ';' + json.dumps(content))
+                        await websocket.send('place_data;' + json.dumps(content))
 
                     else:
                         places[session]['width'] = 100
@@ -348,9 +348,11 @@ async def handler(websocket, path):
                 else:
                     await websocket.send('place_error;Not found')
 
-    except Exception:
+    except Exception as e:
         if trace:
-            print('client_disconnect>')
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print(exc_type, fname, exc_tb.tb_lineno)
 
     finally:
         clients.remove(websocket)

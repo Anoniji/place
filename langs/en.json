@@ -4,7 +4,7 @@
     "key_03": "Go to my Place",
     "key_04": "Authentication with Discord",
     "key_05": "Guest account",
-    "key_06": "created by Anoniji - version 0.2 (beta4)",
+    "key_06": "created by Anoniji - version 1.0",
     "key_07": "Back to Home",
     "key_08": "Enable/Disable Place movement",
     "key_09": "Move the Place to the top left",
@@ -35,7 +35,7 @@
     "key_34": "logged in a",
     "key_35": "Do you confirm the action?",
     "key_36": "Enable/Disable Dark mode",
-    "key_37": "To earn points, go to Discord servers with the ''Place'' bot",
+    "key_37": "To earn points, go to Discord servers with the ''Place'' bot. The points will be added to the page change.",
     "key_38": "You have no points",
     "key_39": "You don't have enough points",
     "key_40": "Loading...",
@@ -45,5 +45,6 @@
     "key_44": "The mode on the Place has changed, reloading of the Place...",
     "key_45": "This pixel is not yet available",
     "key_46": "We still have to wait ",
-    "key_47": " seconds"
+    "key_47": " seconds",
+    "key_48": "Close"
 }
