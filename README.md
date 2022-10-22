@@ -1,6 +1,9 @@
-# place
+# Place by Anoniji
 
-🟦 A r/place by Anoniji
+<img src="https://raw.github.com/Anoniji/place/main/img/favicon.png" height="64px" />
+
+<div>Un r/place avec des fonctionnalités en plus</div>
+<div>An r/place with additional features</div>
 
 # Required
 
@@ -9,7 +12,9 @@
 
 # Config
 
-1. set dicord app info into config.json
-2. pip install -r required.txt
-3. set on line 538 and 464 your info
-4. launch ws.py
+1. Start by filling in the config.json file
+2. Install prerequisites for python3 (pip install -r required.txt)
+3. Set wss_url (line 6) and discord_auth_url (line 7) from /js/app.js
+4. Configure your web server so that the place folder is accessible
+5. Launch ws.py or use start.sh
+6. Launch bot_discord.py or use discord.sh
